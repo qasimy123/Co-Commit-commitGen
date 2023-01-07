@@ -29,20 +29,9 @@ export function activate(context: vscode.ExtensionContext) {
 			prompt+= "\n\n###\n\n";
 			axios({
 				method: 'post',
-				url: 'https://api.openai.com/v1/completions',
-				headers: {
-					'Content-Type': 'application/json',
-					'Authorization': 'Bearer <KEY>'
-				},
+				url: 'https://commitgenerator.vercel.app',
 				data: {
-					"model": "curie:ft-personal:commit-2023-01-07-01-35-45",
 					"prompt": prompt,
-					"temperature": 0.8,
-					"max_tokens": 50,
-					"top_p": 1,
-					"frequency_penalty": 0,
-					"presence_penalty": 0,
-					"stop": ["\n"]
 				  }
 			}).then((response) => {
 				const commitMessage = response.data.choices[0].text;
