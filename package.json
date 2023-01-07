@@ -6,21 +6,41 @@
   "engines": {
     "vscode": "^1.74.0"
   },
+  
   "categories": [
-    "Other"
-  ],
-  "activationEvents": [
-    "onCommand:commitgen.helloWorld"
-  ],
+		"SCM Providers"
+	],
+	"activationEvents": [
+		"*",
+		"onFileSystem:git"
+	],
   "main": "./dist/extension.js",
+  "browser": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "commitgen.helloWorld",
-        "title": "Hello World"
+        "command": "commitgen.genMessage",
+        "title": "Generate Commit Message",
+        "category": "CommitGen",
+        "enablement": "commitGen.enabled",
+        "icon": {
+					"light": "resources/icons/light/icon.svg",
+					"dark": "resources/icons/dark/icon.svg"
+				}
+      }
+    ],
+
+  "menus": {
+    "scm/title": [
+      {
+        "command": "commitgen.genMessage",
+        "group": "navigation@9",
+        "when": "scmProvider == git",
+        "order": 1
       }
     ]
-  },
+  }
+},
   "scripts": {
     "vscode:prepublish": "yarn run package",
     "compile": "webpack",
@@ -33,19 +53,22 @@
     "test": "node ./out/test/runTest.js"
   },
   "devDependencies": {
-    "@types/vscode": "^1.74.0",
     "@types/glob": "^8.0.0",
     "@types/mocha": "^10.0.1",
     "@types/node": "16.x",
+    "@types/vscode": "^1.74.0",
     "@typescript-eslint/eslint-plugin": "^5.45.0",
     "@typescript-eslint/parser": "^5.45.0",
+    "@vscode/test-electron": "^2.2.0",
     "eslint": "^8.28.0",
     "glob": "^8.0.3",
     "mocha": "^10.1.0",
-    "typescript": "^4.9.3",
     "ts-loader": "^9.4.1",
+    "typescript": "^4.9.3",
     "webpack": "^5.75.0",
-    "webpack-cli": "^5.0.0",
-    "@vscode/test-electron": "^2.2.0"
+    "webpack-cli": "^5.0.0"
+  },
+  "dependencies": {
+    "axios": "^1.2.2"
   }
 }
