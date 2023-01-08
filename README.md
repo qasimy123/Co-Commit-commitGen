@@ -1,4 +1,4 @@
-![alt text](commitgen/co-commit App.png)
+![alt text](https://github.com/qasimy123/commitgen/blob/18822c4f63355ca003fee2f4f8559bbef29c9265/co-commit%20App.png)
 
 ## Inspiration
 
