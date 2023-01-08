@@ -1,3 +1,5 @@
+![alt text](commitgen/co-commit App.png)
+
 ## Inspiration
 
 The idea for Co-Commit came from our team's frustration with trying to come up with meaningful and descriptive commit messages on tight deadlines. We wanted to find a way to streamline the commit process, so we could focus on writing code and not worry about crafting the perfect commit message.
