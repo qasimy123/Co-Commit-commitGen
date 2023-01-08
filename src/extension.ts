@@ -15,8 +15,9 @@ export function activate(context: vscode.ExtensionContext) {
 	// Now provide the implementation of the command with registerCommand
 	// The commandId parameter must match the command field in package.json
 	let disposable = vscode.commands.registerCommand('commitgen.genMessage', (repository: Repository) => {
-		repository = getRepo(repository);
+		repository = getRepo(undefined);
 		repository.inputBox.value = "Loading..."
+		console.log("Generating commit message...");
 		repository.diff(true).then((data) => {
 			const files = data.split('diff --git');
 			// For each file remove until the first @@
@@ -36,7 +37,10 @@ export function activate(context: vscode.ExtensionContext) {
 				  }
 			}).then((response) => {
 				const commitMessage = response.data.choices[0].text;
-				repository.inputBox.value = commitMessage;
+				repository.inputBox.value = commitMessage.trim();
+			}).catch((error) => {
+				console.log(prompt.length/4);
+				vscode.window.showInformationMessage(`Your diff is too long (${prompt.length/4} Tokens). Please try again with a smaller diff.`);
 			});
 				
 			
