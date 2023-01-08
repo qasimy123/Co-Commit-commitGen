@@ -16,6 +16,7 @@ export function activate(context: vscode.ExtensionContext) {
 	// The commandId parameter must match the command field in package.json
 	let disposable = vscode.commands.registerCommand('commitgen.genMessage', (repository: Repository) => {
 		repository = getRepo(repository);
+		repository.inputBox.value = "Loading..."
 		repository.diff(true).then((data) => {
 			const files = data.split('diff --git');
 			// For each file remove until the first @@
